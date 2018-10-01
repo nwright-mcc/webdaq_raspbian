@@ -1,0 +1,160 @@
+/dts-v1/;
+/plugin/;
+
+/ {
+    compatible = "brcm,bcm2708";
+
+    fragment@0 {
+        target-path = "/";
+        __overlay__ {
+            buttons: buttons {
+                compatible = "gpio-keys";
+                #autorepeat;
+                #address-cells = <1>;
+                #size-cells = <0>;
+                status = "okay";
+                user_button {
+                    label = "user_button";
+                    linux,code = <30>;      /* KEY_A */
+                    gpios = <&gpio 17 1>;  /* active low */
+                };
+                reset_button {
+                    label = "reset_button";
+                    linux,code = <48>;      /* KEY_B */
+                    gpios = <&gpio 18 1>;  /* active low */
+                };
+            };
+        };
+    };
+
+    fragment@1 {
+        target-path = "/";
+        __overlay__ {
+            virtgpio: virtgpio {
+                compatible = "brcm,bcm2835-virtgpio";
+                gpio-controller;
+                #gpio-cells = <2>;
+                firmware = <&firmware>;
+                status = "okay";
+            };
+        };
+    };    
+
+    fragment@2 {
+        target = <&gpio>;
+        __overlay__ {
+            eeprom_wp_pin: eeprom_wp_pin {
+                brcm,pins = <6>;
+                brcm,function = <0>; /* input */
+                brcm,pull = <0>;    /* none */
+            };
+
+            power_ctrl_pin: power_ctrl_pin {
+                brcm,pins = <4>;
+                brcm,function = <1>; /* output */
+                brcm,pull = <0>; /* none */
+            };
+
+            power_button_pin: power_button_pin {
+                brcm,pins = <16>;
+                brcm,function = <0>; /* input */
+                brcm,pull = <0>;    /* none */
+            };
+
+            button1_pin: button1_pin {
+                brcm,pins = <17>;
+                brcm,function = <0>; /* input */
+                brcm,pull = <0>;    /* none */
+            };
+
+            resetbutton_pin: resetbutton_pin {
+                brcm,pins = <18>;
+                brcm,function = <0>; /* input */
+                brcm,pull = <0>;    /* none */
+            };
+        };
+    };
+
+    fragment@3 {
+        target = <&leds>;
+        __overlay__ {
+            int_led0: int_led0 {
+                label = "internal:green:led0";
+                linux,default-trigger = "mmc0";
+                gpios = <&virtgpio 0 0>;
+            };
+            int_led1: int_led1 {
+                label = "internal:green:led1";
+                linux,default-trigger = "mmc1";
+                gpios = <&gpio 11 0>;
+            };
+            power_led_green: power_led_green {
+                label = "external:green:power";
+                linux,default-trigger = "none";
+                gpios = <&gpio 28 0>;
+            };
+            power_led_yellow: power_led_yellow {
+                label = "external:yellow:power";
+                linux,default-trigger = "default-on";
+                gpios = <&gpio 29 0>;
+            };
+            status_led_green: status_led_green {
+                label = "external:green:status";
+                linux,default-trigger = "none";
+                gpios = <&gpio 30 0>;
+            };
+            status_led_yellow: status_led_yellow {
+                label = "external:yellow:status";
+                linux,default-trigger = "none";
+                gpios = <&gpio 31 0>;
+            };
+            error_led_green: error_led_green {
+                label = "external:green:error";
+                linux,default-trigger = "none";
+                gpios = <&gpio 32 0>;
+            };
+            error_led_yellow: error_led_yellow {
+                label = "external:yellow:error";
+                linux,default-trigger = "none";
+                gpios = <&gpio 33 0>;
+            };
+            media_led_green: media_led_green {
+                label = "external:green:media";
+                linux,default-trigger = "none";
+                gpios = <&gpio 34 0>;
+            };
+            media_led_yellow: media_led_yellow {
+                label = "external:yellow:media";
+                linux,default-trigger = "none";
+                gpios = <&gpio 35 0>;
+            };
+        };
+    };
+    
+    fragment@4 {
+        target = <&i2c_arm>;
+        __overlay__ {
+            #address-cells = <1>;
+            #size-cells = <0>;
+            status = "okay";
+
+            at24@50 {
+                compatible = "at,24c256";
+                pagesize = <64>;
+                reg = <0x50>;
+                status = "okay";
+            };
+
+            ds1374: ds1374@68 {
+                compatible = "maxim,ds1374";
+                reg = <0x68>;
+                status = "okay";
+            };
+        };
+    };
+
+    __overrides__ {
+        
+    };
+};
+

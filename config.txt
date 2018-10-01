@@ -1,0 +1,2 @@
+# Basic WebDAQ hardware support
+dtparam=webdaq

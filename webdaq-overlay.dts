@@ -7,18 +7,34 @@
     fragment@0 {
         target-path = "/";
         __overlay__ {
-            buttons: buttons {
+            power_ctrl: power_ctrl {
+                compatible = "gpio-poweroff";
+                gpios = <&gpio 4 1>;  /* active low */
+                force;
+            };
+        };
+    };
+ 
+    fragment@1 {
+        target-path = "/soc";
+        __overlay__ {
+            buttons {
                 compatible = "gpio-keys";
                 #autorepeat;
                 #address-cells = <1>;
                 #size-cells = <0>;
                 status = "okay";
-                user_button {
+                power_button: power_button {
+                    label = "power_button";
+                    linux,code = <116>;  /* KEY_POWER */
+                    gpios = <&gpio 16 1>; /* active low */
+                };
+                user_button: user_button {
                     label = "user_button";
                     linux,code = <30>;      /* KEY_A */
                     gpios = <&gpio 17 1>;  /* active low */
                 };
-                reset_button {
+                reset_button: reset_button {
                     label = "reset_button";
                     linux,code = <48>;      /* KEY_B */
                     gpios = <&gpio 18 1>;  /* active low */
@@ -26,19 +42,6 @@
             };
         };
     };
-
-    fragment@1 {
-        target-path = "/";
-        __overlay__ {
-            virtgpio: virtgpio {
-                compatible = "brcm,bcm2835-virtgpio";
-                gpio-controller;
-                #gpio-cells = <2>;
-                firmware = <&firmware>;
-                status = "okay";
-            };
-        };
-    };    
 
     fragment@2 {
         target = <&gpio>;
@@ -72,19 +75,20 @@
                 brcm,function = <0>; /* input */
                 brcm,pull = <0>;    /* none */
             };
+            
+            sdsocket_mmc_pins: sdsocket_mmc_pins {
+                brcm,pins = <22 23 24 25 26 27>;
+                brcm,function = <7>; /* alt 3 */
+                brcm,pull = <0>;    /* no pull */
+            };
         };
     };
 
     fragment@3 {
         target = <&leds>;
         __overlay__ {
-            int_led0: int_led0 {
-                label = "internal:green:led0";
-                linux,default-trigger = "mmc0";
-                gpios = <&virtgpio 0 0>;
-            };
-            int_led1: int_led1 {
-                label = "internal:green:led1";
+            led1: led1 {
+                label = "led1";
                 linux,default-trigger = "mmc1";
                 gpios = <&gpio 11 0>;
             };
@@ -132,7 +136,7 @@
     };
     
     fragment@4 {
-        target = <&i2c_arm>;
+        target = <&i2c1>;
         __overlay__ {
             #address-cells = <1>;
             #size-cells = <0>;
@@ -153,8 +157,60 @@
         };
     };
 
+    fragment@5 {
+        target = <&mmc>;
+        __overlay__ {
+            status = "disabled";
+        };
+    };
+
+    fragment@6 {
+	target = <&soc>;
+	__overlay__ {
+            #address-cells = <1>;
+            #size-cells = <1>;
+
+            sdio_ovl: sdio@7e300000 {
+                compatible = "brcm,bcm2835-mmc",
+                             "brcm,bcm2835-sdhci";
+                reg = <0x7e300000 0x100>;
+                interrupts = <2 30>;
+                clocks = <&clocks 28/*BCM2835_CLOCK_EMMC*/>;
+                dmas = <&dma 11>;
+                dma-names = "rx-tx";
+                brcm,overclock-50 = <0>;
+                status = "okay";
+                pinctrl-names = "default";
+                pinctrl-0 = <&sdsocket_mmc_pins>;
+                bus-width = <4>;           
+                wp-gpios = <&gpio 21 0>;
+                cd-gpios = <&gpio 20 0>;
+                cd-inverted;
+            };
+        };
+    };
+
+    fragment@7 {
+        target-path = "/aliases";
+        __overlay__ {
+            mmc1 = "/soc/sdio@7e300000";
+        };
+    };
+
     __overrides__ {
-        
+        led1_trigger = <&led1>,"linux,default-trigger";
+        power_led_green_trigger = <&power_led_green>,"linux,default-trigger";
+        power_led_green_yellow = <&power_led_yellow>,"linux,default-trigger";
+        status_led_green_trigger = <&status_led_green>,"linux,default-trigger";
+        status_led_green_yellow = <&status_led_yellow>,"linux,default-trigger";
+        error_led_green_trigger = <&error_led_green>,"linux,default-trigger";
+        error_led_green_yellow = <&error_led_yellow>,"linux,default-trigger";
+        media_led_green_trigger = <&power_led_green>,"linux,default-trigger";
+        media_led_green_yellow = <&power_led_yellow>,"linux,default-trigger";
+        power_button_keycode = <&power_button>,"linux,code:0";
+        user_button_keycode = <&user_button>,"linux,code:0";
+        reset_button_keycode = <&reset_button>,"linux,code:0";
+        sdio_overclock = <&sdio_ovl>,"brcm,overclock-50:0";
     };
 };
 

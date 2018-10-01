@@ -1,2 +1,21 @@
 # Basic WebDAQ hardware support
-dtparam=webdaq
+dtoverlay=webdaq
+
+# Options, uncomment and modify as needed
+
+# Change the keyboard codes returned by the buttons
+#dtparam=power_button_keycode=46
+#dtparam=user_button_keycode=46
+#dtparam=reset_button_keycode=46
+
+# Change the LED triggers - see the triggers file for possible values
+#dtparam=act_led_trigger="none"
+#dtparam=led1_trigger="none"
+#dtparam=power_led_green_trigger="none"
+#dtparam=power_led_yellow_trigger="default-on"
+#dtparam=status_led_green_trigger="mmc0"
+#dtparam=status_led_yellow_trigger="mmc0"
+#dtparam=error_led_green_trigger="mmc1"
+#dtparam=error_led_yellow_trigger="mmc1"
+#dtparam=media_led_green_trigger="default-on"
+#dtparam=media_led_yellow_trigger="none"

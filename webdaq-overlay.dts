@@ -46,13 +46,7 @@
     fragment@2 {
         target = <&gpio>;
         __overlay__ {
-            eeprom_wp_pin: eeprom_wp_pin {
-                brcm,pins = <6>;
-                brcm,function = <0>; /* input */
-                brcm,pull = <0>;    /* none */
-            };
-
-            power_ctrl_pin: power_ctrl_pin {
+           power_ctrl_pin: power_ctrl_pin {
                 brcm,pins = <4>;
                 brcm,function = <1>; /* output */
                 brcm,pull = <0>; /* none */
@@ -93,42 +87,42 @@
                 gpios = <&gpio 11 0>;
             };
             power_led_green: power_led_green {
-                label = "external:green:power";
-                linux,default-trigger = "none";
+                label = "power_led_green";
+                linux,default-trigger = "default-on";
                 gpios = <&gpio 28 0>;
             };
             power_led_yellow: power_led_yellow {
-                label = "external:yellow:power";
-                linux,default-trigger = "default-on";
+                label = "power_led_yellow";
+                linux,default-trigger = "none";
                 gpios = <&gpio 29 0>;
             };
             status_led_green: status_led_green {
-                label = "external:green:status";
+                label = "status_led_green";
                 linux,default-trigger = "none";
                 gpios = <&gpio 30 0>;
             };
             status_led_yellow: status_led_yellow {
-                label = "external:yellow:status";
+                label = "status_led_yellow";
                 linux,default-trigger = "none";
                 gpios = <&gpio 31 0>;
             };
             error_led_green: error_led_green {
-                label = "external:green:error";
+                label = "error_led_green";
                 linux,default-trigger = "none";
                 gpios = <&gpio 32 0>;
             };
             error_led_yellow: error_led_yellow {
-                label = "external:yellow:error";
+                label = "error_led_yellow";
                 linux,default-trigger = "none";
                 gpios = <&gpio 33 0>;
             };
             media_led_green: media_led_green {
-                label = "external:green:media";
+                label = "media_led_green";
                 linux,default-trigger = "none";
                 gpios = <&gpio 34 0>;
             };
             media_led_yellow: media_led_yellow {
-                label = "external:yellow:media";
+                label = "media_led_yellow";
                 linux,default-trigger = "none";
                 gpios = <&gpio 35 0>;
             };
@@ -141,13 +135,6 @@
             #address-cells = <1>;
             #size-cells = <0>;
             status = "okay";
-
-            at24@50 {
-                compatible = "at,24c256";
-                pagesize = <64>;
-                reg = <0x50>;
-                status = "okay";
-            };
 
             ds1374: ds1374@68 {
                 compatible = "maxim,ds1374";
@@ -183,7 +170,6 @@
                 pinctrl-names = "default";
                 pinctrl-0 = <&sdsocket_mmc_pins>;
                 bus-width = <4>;           
-                wp-gpios = <&gpio 21 0>;
                 cd-gpios = <&gpio 20 0>;
                 cd-inverted;
             };
@@ -200,13 +186,13 @@
     __overrides__ {
         led1_trigger = <&led1>,"linux,default-trigger";
         power_led_green_trigger = <&power_led_green>,"linux,default-trigger";
-        power_led_green_yellow = <&power_led_yellow>,"linux,default-trigger";
+        power_led_yellow_trigger = <&power_led_yellow>,"linux,default-trigger";
         status_led_green_trigger = <&status_led_green>,"linux,default-trigger";
-        status_led_green_yellow = <&status_led_yellow>,"linux,default-trigger";
+        status_led_yellow_trigger = <&status_led_yellow>,"linux,default-trigger";
         error_led_green_trigger = <&error_led_green>,"linux,default-trigger";
-        error_led_green_yellow = <&error_led_yellow>,"linux,default-trigger";
-        media_led_green_trigger = <&power_led_green>,"linux,default-trigger";
-        media_led_green_yellow = <&power_led_yellow>,"linux,default-trigger";
+        error_led_yellow_trigger = <&error_led_yellow>,"linux,default-trigger";
+        media_led_green_trigger = <&media_led_green>,"linux,default-trigger";
+        media_led_yellow_trigger = <&media_led_yellow>,"linux,default-trigger";
         power_button_keycode = <&power_button>,"linux,code:0";
         user_button_keycode = <&user_button>,"linux,code:0";
         reset_button_keycode = <&reset_button>,"linux,code:0";

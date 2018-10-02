@@ -40,12 +40,6 @@
         pin@p25 { function = "input";   termination = "no_pulling"; drive_strength_mA = <8>; }; // SD_D1
         pin@p26 { function = "input";   termination = "no_pulling"; drive_strength_mA = <8>; }; // SD_D2
         pin@p27 { function = "input";   termination = "no_pulling"; drive_strength_mA = <8>; }; // SD_D3
-//        pin@p22 { function = "emmc";  termination = "pull_up";    drive_strength_mA = <8>; }; // SD CLK
-//        pin@p23 { function = "emmc";  termination = "pull_up";    drive_strength_mA = <8>; }; // SD CMD
-//        pin@p24 { function = "emmc";  termination = "pull_up";    drive_strength_mA = <8>; }; // SD D0
-//        pin@p25 { function = "emmc";  termination = "pull_up";    drive_strength_mA = <8>; }; // SD D1
-//        pin@p26 { function = "emmc";  termination = "pull_up";    drive_strength_mA = <8>; }; // SD D2
-//        pin@p27 { function = "emmc";  termination = "pull_up";    drive_strength_mA = <8>; }; // SD D3
 
         // BANK 1 - USER GPIO//
         pin@p28 { function = "input";   termination = "no_pulling"; }; // LED_0_G

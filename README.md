@@ -5,26 +5,28 @@ data acquisition system.  Complete information is in [Webdaq_Raspbian.pdf](https
 
 ### DAQ Driver Installation
 
-1. After installing Raspbian per the document, download the DAQ driver:
+1. Installing Raspbian per the document above.
+2. Connect an Ethernet cable to the WebDAQ and verify that you have a working connection to the internet.
+3. Download the DAQ driver:
 
 ```sh
   wget https://github.com/nwright-mcc/webdaq_raspbian/raw/master/libulwd.0.0.1-b1.tar.bz2
 ```
 
-2. Extract and install the driver:
+4. Extract and install the driver:
 
 ``` sh
   tar -xvjf libulwd.0.0.1-b1.tar.bz2
 ```
 
-3. Run the following commands to install the library:
+5. Run the following commands to install the library:
 
 ``` sh
   cd libulwd
   sudo sh install.sh
 ```
 
-4. Reboot the WebDAQ system
+6. Reboot the WebDAQ system
 
 ### Examples
 The C examples are located in the examples folder. Run the following commands to build the examples:

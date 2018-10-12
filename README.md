@@ -7,28 +7,45 @@ data acquisition system.  Complete information is in [Webdaq_Raspbian.pdf](https
 
 1. Installing Raspbian per the document above.
 2. Connect an Ethernet cable to the WebDAQ and verify that you have a working connection to the internet.
-3. Download the DAQ driver:
+
+3. Update your package list:
+
+``` sh
+  sudo apt-get update
+```
+
+4. Download the DAQ driver:
 
 ```sh
   wget https://github.com/nwright-mcc/webdaq_raspbian/raw/master/libulwd.0.0.1-b1.tar.bz2
 ```
 
-4. Extract and install the driver:
+5. Extract and install the driver:
 
 ``` sh
   tar -xvjf libulwd.0.0.1-b1.tar.bz2
 ```
 
-5. Run the following commands to install the library:
+6. Run the following commands to install the library:
 
 ``` sh
   cd libulwd
   sudo sh install.sh
 ```
 
-6. Reboot the WebDAQ system
+7. Reboot the WebDAQ system
 
 ### Examples
+
+####Python
+The Python examples are located in the examples folder. To execute the examples, run the following commands:
+
+``` sh
+  ./AInScan.py
+  ./AInScan_IEPE.py
+```
+
+####C
 The C examples are located in the examples folder. Run the following commands to build the examples:
 
 ``` sh

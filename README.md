@@ -37,7 +37,7 @@ data acquisition system.  Complete information is in [Webdaq_Raspbian.pdf](https
 
 ### Examples
 
-####Python
+#### Python
 The Python examples are located in the examples folder. To execute the examples, run the following commands:
 
 ``` sh
@@ -45,7 +45,7 @@ The Python examples are located in the examples folder. To execute the examples,
   ./AInScan_IEPE.py
 ```
 
-####C
+#### C
 The C examples are located in the examples folder. Run the following commands to build the examples:
 
 ``` sh

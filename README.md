@@ -17,13 +17,13 @@ data acquisition system.  Complete information is in [Webdaq_Raspbian.pdf](https
 4. Download the DAQ driver:
 
 ```sh
-  wget https://github.com/nwright-mcc/webdaq_raspbian/raw/master/libulwd.0.0.1-b1.tar.bz2
+  wget https://github.com/nwright-mcc/webdaq_raspbian/raw/master/libulwd.0.0.1-b3.tar.bz2
 ```
 
 5. Extract and install the driver:
 
 ``` sh
-  tar -xvjf libulwd.0.0.1-b1.tar.bz2
+  tar -xvjf libulwd.0.0.1-b3.tar.bz2
 ```
 
 6. Run the following commands to install the library:

@@ -43,8 +43,8 @@ The Python examples are located in the examples folder. To execute the examples,
 
 ``` sh
   cd ~/libulwd/examples/python
-  ./AInScan.py
-  ./AInScan_IEPE.py
+  ./a_in_scan.py
+  ./a_in_scan_iepe.py
 ```
 
 #### C

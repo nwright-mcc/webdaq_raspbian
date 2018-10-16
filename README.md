@@ -17,6 +17,7 @@ data acquisition system.  Complete information is in [Webdaq_Raspbian.pdf](https
 4. Download the DAQ driver:
 
 ```sh
+  cd ~
   wget https://github.com/nwright-mcc/webdaq_raspbian/raw/master/libulwd.0.0.1-b4.tar.bz2
 ```
 

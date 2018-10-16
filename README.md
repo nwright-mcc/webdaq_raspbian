@@ -63,7 +63,7 @@ To execute the examples, run the following commands:
 ```
 
 ### Documentation
-Online help for the DAQ driver is available [Python Interface](https://nwright-mcc.github.io/webdaq_raspbian/).
+Online Python help for the DAQ driver is available at https://nwright-mcc.github.io/webdaq_raspbian/
 
 #### Note: The DAQ module's firmware is stored in a volatile memory, therefore the firmware image will be lost when the WebDAQ system is shut down. The ulGetDeviceInventory function loads the firmware image to the module when it is invoked for the first time after system boot up. Loading the firmware image takes about 5 to 8 seconds.
 

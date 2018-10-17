@@ -1,9 +1,13 @@
-## Using Raspbian on a WebDAQ
+# WebDAQ Raspbian and DAQ Library
 
-These files and instructions support overwriting the MCC firmware on a WebDAQ with Raspbian in order to create a customized
-data acquisition system.  Complete information is in [Webdaq_Raspbian.pdf](https://github.com/nwright-mcc/webdaq_raspbian/raw/master/Webdaq_Raspbian.pdf).
+## Installing and Using Raspbian on a WebDAQ
 
-### DAQ Driver Installation
+These files and instructions enable overwriting the MCC firmware on a WebDAQ with Raspbian in order to create a customized
+data acquisition system.  Full information is in [Webdaq_Raspbian.pdf](https://github.com/nwright-mcc/webdaq_raspbian/raw/master/Webdaq_Raspbian.pdf).
+
+The DAQ driver and examples may then be installed to access the data acquisition hardware.
+
+## DAQ Library and Driver Installation
 
 1. Installing Raspbian per the document above.
 2. Connect an Ethernet cable to the WebDAQ and verify that you have a working connection to the internet.
@@ -63,7 +67,7 @@ To execute the examples, run the following commands:
 ```
 
 ### Documentation
-Online Python help for the DAQ driver is available [here](https://nwright-mcc.github.io/webdaq_raspbian/).
+Online Python help for the DAQ library is available at https://nwright-mcc.github.io/webdaq_raspbian.
 
 #### Note: The DAQ module's firmware is stored in a volatile memory, therefore the firmware image will be lost when the WebDAQ system is shut down. The ulGetDeviceInventory function loads the firmware image to the module when it is invoked for the first time after system boot up. Loading the firmware image takes about 5 to 8 seconds.
 

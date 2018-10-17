@@ -1,4 +1,4 @@
-# WebDAQ Raspbian and Universal Library
+# WebDAQ Raspbian and DAQ Library
 
 ## Installing and Using Raspbian on a WebDAQ
 
@@ -7,7 +7,7 @@ data acquisition system.  Full information is in [Webdaq_Raspbian.pdf](https://g
 
 The DAQ driver and examples may then be installed to access the data acquisition hardware.
 
-## DAQ Driver Installation
+## DAQ Library and Driver Installation
 
 1. Installing Raspbian per the document above.
 2. Connect an Ethernet cable to the WebDAQ and verify that you have a working connection to the internet.
